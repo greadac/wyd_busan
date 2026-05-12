@@ -1,358 +1,914 @@
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>그리스도는 살아 계십니다 · WYD 워크북</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-.app{max-width:380px;font-family:var(--font-sans);background:var(--color-background-primary)}
-.screen{display:none}.screen.active{display:block}
-.home-header{background:#C0503C;padding:1.5rem 1.25rem 1.75rem}
-.home-badge{font-size:11px;background:rgba(255,255,255,0.2);color:white;display:inline-block;padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.05em}
-.home-title{font-size:22px;font-weight:500;color:white;line-height:1.3}
-.home-sub{font-size:13px;color:rgba(255,255,255,0.8);margin-top:5px}
-.chapter-list{padding:1rem 1.25rem}
-.ch-card{display:flex;align-items:center;gap:12px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:13px 15px;margin-bottom:8px;cursor:pointer;transition:background .15s}
-.ch-card:hover{background:var(--color-background-secondary)}
-.ch-num{width:36px;height:36px;border-radius:50%;background:#FDF3F0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#993C1D;flex-shrink:0}
-.ch-info{flex:1;min-width:0}
-.ch-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
-.ch-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
-.ch-badge{font-size:10px;padding:2px 8px;border-radius:20px;flex-shrink:0;background:#EAF3DE;color:#3B6D11}
-.ch-badge.last{background:#E6F1FB;color:#185FA5}
-.add-card{display:flex;align-items:center;gap:12px;border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:13px 15px;margin-bottom:8px;cursor:pointer;transition:background .15s}
-.add-card:hover{background:var(--color-background-secondary)}
-.synod-banner{background:#FDF3F0;border:0.5px solid #F5C4B3;border-radius:var(--border-radius-lg);padding:13px 15px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s}
-.synod-banner:hover{background:#FAE8E4}
-.synod-icon{width:36px;height:36px;border-radius:50%;background:#FDF3F0;border:0.5px solid #F5C4B3;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#993C1D}
-.reader-header{background:#C0503C;padding:1rem 1.25rem 1.25rem;display:flex;align-items:flex-start;gap:12px}
-.back-btn{background:none;border:none;color:white;cursor:pointer;padding:2px;margin-top:2px}
-.rhtext{flex:1}
-.rbadge{font-size:11px;background:rgba(255,255,255,0.2);color:white;display:inline-block;padding:2px 8px;border-radius:12px;margin-bottom:5px}
-.rtitle{font-size:16px;font-weight:500;color:white;line-height:1.3}
-.steps-row{display:flex;gap:5px;padding:9px 1.25rem;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary);overflow-x:auto}
-.step-dot{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;min-width:46px}
-.sdot{width:25px;height:25px;border-radius:50%;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--color-text-secondary);transition:all .2s}
-.step-dot.active .sdot{background:#C0503C;border-color:#C0503C;color:white}
-.slabel{font-size:10px;color:var(--color-text-tertiary);text-align:center;line-height:1.2}
-.step-dot.active .slabel{color:#C0503C}
-.content{padding:1.25rem}
-.sec{display:none}.sec.active{display:block}
-.qbox{background:#FDF3F0;border-left:3px solid #C0503C;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.9rem 1rem;margin-bottom:1rem}
-.qbox p{font-size:14px;line-height:1.75;color:#4A1B0C;font-style:italic}
-.qsrc{font-size:11px;color:#993C1D;margin-top:6px;font-style:normal}
-.bt{font-size:14px;line-height:1.8;color:var(--color-text-primary);margin-bottom:.85rem}
-.pb{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 13px;margin-bottom:.9rem}
-.pb p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
-textarea{width:100%;min-height:88px;font-size:14px;line-height:1.6;padding:9px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);resize:vertical;font-family:var(--font-sans)}
-textarea:focus{outline:none;border-color:#C0503C}
-.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px}
-.qcard .qt{font-size:14px;color:var(--color-text-primary);line-height:1.6;margin-bottom:9px}
-.ds{border-left:2px solid var(--color-border-tertiary);padding-left:13px;margin-bottom:13px}
-.ds.hi{border-left-color:#C0503C}
-.ds h3{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
-.ds p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
-.trow{display:flex;align-items:center;gap:10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:9px 13px;margin:7px 0}
-.trow span{font-size:13px;color:var(--color-text-secondary)}
-.tcnt{font-size:16px;font-weight:500;color:#C0503C;min-width:32px}
-.tbtn{font-size:12px;padding:4px 11px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:var(--color-background-primary);cursor:pointer;color:var(--color-text-primary)}
-.pbox{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
-.pbox p{font-size:14px;line-height:1.9;color:var(--color-text-primary)}
-.fbox{border-left:3px solid #185FA5;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0;background:var(--color-background-secondary);padding:1rem 1.25rem;margin-bottom:1rem}
-.fbox p{font-size:14px;line-height:1.7;color:var(--color-text-primary)}
-.fsrc{font-size:11px;color:var(--color-text-tertiary);margin-top:6px}
-.actbox{background:#FDF3F0;border:0.5px solid #F5C4B3;border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
-.actbox p{font-size:14px;line-height:1.7;color:#4A1B0C}
-.mi{width:100%;font-size:14px;padding:9px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-family:var(--font-sans)}
-.mi:focus{outline:none;border-color:#C0503C}
-.md{background:#FFF8E8;border:0.5px solid #FAC775;border-radius:var(--border-radius-md);padding:13px;min-height:58px;margin-top:9px;text-align:center;line-height:1.7}
-.nr{display:flex;gap:8px;margin-top:1.4rem}
-.btn{flex:1;padding:10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;transition:background .15s;font-family:var(--font-sans)}
-.btn:hover{background:var(--color-background-secondary)}
-.btn.p{background:#C0503C;border-color:#C0503C;color:white}
-.btn.p:hover{background:#A84030}
-.stl{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:11px}
-.en{display:flex;align-items:flex-start;gap:9px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 13px;margin-bottom:.9rem}
-.en p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
-.synod-screen{padding:1.25rem}
-.synod-line-o{font-size:14px;line-height:1.9;color:var(--color-text-primary)}
-.synod-line-b{font-size:14px;line-height:1.9;color:var(--color-text-primary);font-weight:500}
-.synod-amen{font-size:15px;font-weight:500;color:#C0503C;margin-top:.5rem}
+:root {
+  --red: #C0503C;
+  --red-dark: #A84030;
+  --red-light: #FDF3F0;
+  --red-border: #F5C4B3;
+  --blue: #185FA5;
+  --blue-light: #E6F1FB;
+  --green-light: #EAF3DE;
+  --green: #3B6D11;
+  --gold: #FAC775;
+  --gold-light: #FFF8E8;
+  --bg: #FAFAF8;
+  --bg2: #F4F2EF;
+  --bg3: #EEECE8;
+  --border: #DDD8D0;
+  --border2: #C8C2BA;
+  --text: #2A2520;
+  --text2: #6B6460;
+  --text3: #9E9890;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #E8E5E0;
+  min-height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.phone-wrap {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.18);
+}
+
+/* ── SCREENS ── */
+.screen { display: none; flex-direction: column; min-height: 100vh; }
+.screen.active { display: flex; }
+
+/* ── HOME ── */
+.home-header {
+  background: var(--red);
+  padding: 2rem 1.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.home-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+.home-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.home-badge {
+  font-size: 11px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  letter-spacing: .08em;
+  position: relative; z-index: 1;
+}
+.home-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  position: relative; z-index: 1;
+}
+.home-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 6px;
+  position: relative; z-index: 1;
+}
+.home-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 1.25rem;
+}
+.section-label:first-child { margin-top: 0; }
+
+.prayer-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--red-light);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius);
+  padding: 13px 15px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background .15s;
+  text-decoration: none;
+}
+.prayer-banner:hover { background: #FAE8E4; }
+.pb-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(192,80,60,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--red);
+  font-size: 18px;
+}
+.pb-text .t1 { font-size: 14px; font-weight: 500; color: #712B13; }
+.pb-text .t2 { font-size: 11px; color: #993C1D; margin-top: 2px; }
+
+.ch-card {
+  display: flex; align-items: center; gap: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 15px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all .15s;
+  text-decoration: none;
+}
+.ch-card:hover { background: var(--bg2); border-color: var(--border2); }
+.ch-num {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--red-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500;
+  color: #993C1D; flex-shrink: 0;
+}
+.ch-info { flex: 1; min-width: 0; }
+.ch-info .t1 { font-size: 14px; font-weight: 500; color: var(--text); }
+.ch-info .t2 { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.ch-badge {
+  font-size: 10px; padding: 3px 9px;
+  border-radius: 20px; flex-shrink: 0;
+  background: var(--green-light); color: var(--green);
+}
+.ch-badge.last { background: var(--blue-light); color: var(--blue); }
+
+.link-row {
+  display: flex; gap: 8px; margin-bottom: 8px;
+}
+.link-card {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .15s;
+  text-align: center;
+}
+.link-card:hover { background: var(--bg2); border-color: var(--border2); }
+.link-card .lc-icon { font-size: 22px; color: var(--red); }
+.link-card .lc-t1 { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.3; }
+.link-card .lc-t2 { font-size: 10px; color: var(--text3); }
+
+.official-prayer-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.official-prayer-card:hover { background: var(--bg2); }
+.official-prayer-card .opc-top { display: flex; align-items: center; gap: 10px; margin-bottom: 0; }
+.official-prayer-card .opc-icon { font-size: 20px; color: var(--red); }
+.official-prayer-card .opc-title { font-size: 14px; font-weight: 500; color: var(--text); }
+.official-prayer-card .opc-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.official-prayer-card .opc-arrow { margin-left: auto; font-size: 16px; color: var(--text3); }
+
+/* ── CHAPTER SCREEN ── */
+.ch-header {
+  background: var(--red);
+  padding: 0;
+}
+.ch-header-top {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.back-btn {
+  background: none; border: none;
+  color: white; cursor: pointer;
+  padding: 2px; margin-top: 3px;
+  font-size: 20px;
+  display: flex; align-items: center;
+  opacity: .85; transition: opacity .15s;
+}
+.back-btn:hover { opacity: 1; }
+.ch-htext { flex: 1; }
+.ch-hbadge {
+  font-size: 11px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 12px;
+  margin-bottom: 5px;
+}
+.ch-htitle {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px; font-weight: 600;
+  color: white; line-height: 1.3;
+}
+
+.steps-row {
+  display: flex; gap: 4px;
+  padding: 10px 1.25rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.step-dot {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  cursor: pointer; min-width: 50px;
+}
+.sdot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text3);
+  transition: all .2s;
+}
+.step-dot.active .sdot { background: var(--red); border-color: var(--red); color: white; }
+.slabel { font-size: 10px; color: var(--text3); text-align: center; line-height: 1.2; }
+.step-dot.active .slabel { color: var(--red); font-weight: 500; }
+
+.ch-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
+
+/* ── NAV BAR ── */
+.nav-bar {
+  display: flex; gap: 8px;
+  padding: 12px 1.25rem;
+  background: white;
+  border-top: 1px solid var(--border);
+  position: sticky; bottom: 0;
+}
+.nav-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all .15s;
+  text-decoration: none;
+}
+.nav-btn:hover { background: var(--bg2); border-color: var(--border2); }
+.nav-btn.pri {
+  background: var(--red); border-color: var(--red);
+  color: white;
+}
+.nav-btn.pri:hover { background: var(--red-dark); }
+.nav-btn.home-btn {
+  flex: 0 0 42px;
+  padding: 10px;
+}
+
+/* ── CONTENT COMPONENTS ── */
+.sec-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.quote-box {
+  background: var(--red-light);
+  border-left: 3px solid var(--red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+.quote-box p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px; line-height: 1.8;
+  color: #4A1B0C; font-style: italic;
+}
+.qsrc { font-size: 11px; color: #993C1D; margin-top: 7px; font-style: normal; font-family: 'Noto Sans KR', sans-serif; }
+.body-text { font-size: 14px; line-height: 1.85; color: var(--text); margin-bottom: .9rem; }
+.prompt-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  margin-bottom: 1rem;
+}
+.prompt-box p { font-size: 13px; color: var(--text2); line-height: 1.55; }
+textarea {
+  width: 100%;
+  min-height: 90px;
+  font-size: 14px; line-height: 1.65;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--text);
+  resize: vertical;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+textarea:focus { outline: none; border-color: var(--red); }
+.q-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: 10px;
+}
+.q-card .qt { font-size: 14px; color: var(--text); line-height: 1.65; margin-bottom: 10px; }
+.dialog-step { border-left: 2px solid var(--border2); padding-left: 14px; margin-bottom: 14px; }
+.dialog-step.hi { border-left-color: var(--red); }
+.dialog-step h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.dialog-step p { font-size: 13px; color: var(--text2); line-height: 1.55; }
+.timer-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 9px 13px; margin: 8px 0;
+}
+.timer-row span { font-size: 13px; color: var(--text2); }
+.tcnt { font-size: 17px; font-weight: 500; color: var(--red); min-width: 36px; font-variant-numeric: tabular-nums; }
+.tbtn {
+  font-size: 12px; padding: 5px 13px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white; cursor: pointer;
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all .15s;
+}
+.tbtn:hover { background: var(--bg2); }
+.prayer-box {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.prayer-box p { font-family: 'Noto Serif KR', serif; font-size: 14px; line-height: 2; color: var(--text); }
+.further-box {
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--bg2);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+.further-box p { font-size: 14px; line-height: 1.75; color: var(--text); }
+.fsrc { font-size: 11px; color: var(--text3); margin-top: 7px; }
+.act-box {
+  background: var(--red-light);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+.act-box p { font-size: 14px; line-height: 1.7; color: #4A1B0C; }
+.center-box {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.center-box .cb-icon { font-size: 32px; color: var(--text3); }
+.center-box p { font-size: 13px; color: var(--text2); margin-top: 8px; line-height: 1.55; }
+.center-box .cb-tag { font-size: 12px; color: var(--red); margin-top: 7px; font-weight: 500; }
+.memo-inp {
+  width: 100%; font-size: 14px;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white; color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.memo-inp:focus { outline: none; border-color: var(--red); }
+.memo-display {
+  background: var(--gold-light);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 14px; min-height: 62px;
+  margin-top: 10px; text-align: center;
+  line-height: 1.75;
+}
+.ebook-note {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px; margin-bottom: 1rem;
+}
+.ebook-note i { font-size: 18px; color: var(--text3); flex-shrink: 0; margin-top: 1px; }
+.ebook-note p { font-size: 13px; color: var(--text2); line-height: 1.55; }
+.ebook-note a { color: var(--red); text-decoration: none; }
+.ebook-note a:hover { text-decoration: underline; }
+.finish-banner {
+  background: var(--red-light);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.finish-banner .fb-t1 { font-size: 13px; font-weight: 500; color: #712B13; margin-bottom: 4px; }
+.finish-banner .fb-t2 { font-size: 12px; color: #993C1D; }
+.divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+/* ── SYNOD SCREEN ── */
+.synod-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
+.synod-title-block {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 12px; color: var(--text3);
+  font-style: italic;
+  margin-bottom: 1.25rem;
+}
+.synod-block {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.synod-line { font-family: 'Noto Serif KR', serif; font-size: 14px; line-height: 2; color: var(--text); }
+.synod-line.bold { font-weight: 600; }
+.synod-spacer { height: .75rem; }
+.synod-amen { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 600; color: var(--red); margin-top: .5rem; }
+
+/* ── OFFICIAL PRAYER SCREEN ── */
+.off-prayer-body { flex: 1; padding: 1.25rem; overflow-y: auto; }
+.off-prayer-block {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.off-prayer-text { font-family: 'Noto Serif KR', serif; font-size: 14px; line-height: 2.1; color: var(--text); }
+.off-prayer-text .section-break { height: .75rem; }
+.off-prayer-response {
+  display: flex; gap: 8px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px; line-height: 1.8; color: var(--text);
+}
+.off-prayer-response .mark { font-weight: 600; color: var(--red); flex-shrink: 0; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 </style>
+</head>
+<body>
+<div class="phone-wrap">
 
-<div class="app">
-
+<!-- ==============================
+     HOME SCREEN
+============================== -->
 <div class="screen active" id="homeScreen">
   <div class="home-header">
     <div class="home-badge">CHRISTUS VIVIT · 2027 서울 WYD</div>
-    <div class="home-title">그리스도는 살아 계십니다</div>
+    <div class="home-title">그리스도는<br>살아 계십니다</div>
     <div class="home-sub">워크북 인터랙티브 앱 · 4개 과 수록</div>
   </div>
-  <div class="chapter-list">
-    <div class="synod-banner" onclick="showSynod()">
-      <div class="synod-icon"><i class="ti ti-pray" style="font-size:18px" aria-hidden="true"></i></div>
-      <div>
-        <div style="font-size:13px;font-weight:500;color:#712B13">시노드를 위한 기도</div>
-        <div style="font-size:11px;color:#993C1D;margin-top:2px">Adsumus Sancte Spiritus · 각 과 시작 전 함께</div>
+  <div class="home-body">
+
+    <div class="section-label">기도</div>
+    <div class="prayer-banner" onclick="showScreen('synodScreen')">
+      <div class="pb-icon"><i class="ti ti-pray"></i></div>
+      <div class="pb-text">
+        <div class="t1">시노드를 위한 기도</div>
+        <div class="t2">Adsumus Sancte Spiritus · 각 과 시작 전 함께</div>
       </div>
+      <i class="ti ti-chevron-right" style="margin-left:auto;color:var(--text3)"></i>
     </div>
+    <div class="prayer-banner" onclick="showScreen('officialPrayerScreen')">
+      <div class="pb-icon"><i class="ti ti-star"></i></div>
+      <div class="pb-text">
+        <div class="t1">2027 서울 세계청년대회 공식기도문</div>
+        <div class="t2">젊은이를 사랑하시는 주님...</div>
+      </div>
+      <i class="ti ti-chevron-right" style="margin-left:auto;color:var(--text3)"></i>
+    </div>
+
+    <div class="section-label">과목</div>
     <div class="ch-card" onclick="openCh(2)">
-      <div class="ch-num"><i class="ti ti-check" style="font-size:14px" aria-hidden="true"></i></div>
-      <div class="ch-info"><div class="ch-title">2과 · 우리를 부르시는 하느님</div><div class="ch-sub">마태오 14,22-33 · 성소와 부르심</div></div>
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">2과 · 우리를 부르시는 하느님</div><div class="t2">마태오 14,22-33 · 성소와 부르심</div></div>
       <div class="ch-badge">완료</div>
     </div>
     <div class="ch-card" onclick="openCh(7)">
-      <div class="ch-num"><i class="ti ti-check" style="font-size:14px" aria-hidden="true"></i></div>
-      <div class="ch-info"><div class="ch-title">7과 · 함께 걷는 길</div><div class="ch-sub">시노드 · 공동 책임의 참여 교회</div></div>
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">7과 · 함께 걷는 길</div><div class="t2">시노드 · 공동 책임의 참여 교회</div></div>
       <div class="ch-badge">완료</div>
     </div>
     <div class="ch-card" onclick="openCh(8)">
-      <div class="ch-num"><i class="ti ti-check" style="font-size:14px" aria-hidden="true"></i></div>
-      <div class="ch-info"><div class="ch-title">8과 · 부르심과 식별</div><div class="ch-sub">성소 · 참된 자신을 발견하는 여정</div></div>
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">8과 · 부르심과 식별</div><div class="t2">성소 · 참된 자신을 발견하는 여정</div></div>
       <div class="ch-badge">완료</div>
     </div>
     <div class="ch-card" onclick="openCh(9)">
-      <div class="ch-num"><i class="ti ti-check" style="font-size:14px" aria-hidden="true"></i></div>
-      <div class="ch-info"><div class="ch-title">9과 · 가자! 갈릴래아로!</div><div class="ch-sub">요한 16,33 · WYD를 향한 마지막 여정</div></div>
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">9과 · 가자! 갈릴래아로!</div><div class="t2">요한 16,33 · WYD를 향한 마지막 여정</div></div>
       <div class="ch-badge last">최종과</div>
     </div>
-    <div class="add-card" onclick="sendPrompt('다음 과 PDF를 업로드할게요. 동일한 구조의 앱으로 추가해 주세요. ↗')">
-      <div style="width:36px;height:36px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--color-text-tertiary)"><i class="ti ti-plus" style="font-size:18px" aria-hidden="true"></i></div>
-      <div><div style="font-size:14px;color:var(--color-text-secondary)">다른 과 추가하기 ↗</div><div style="font-size:11px;color:var(--color-text-tertiary);margin-top:2px">PDF를 채팅창에 올리고 요청하세요</div></div>
+
+    <div class="section-label">참고 자료</div>
+    <div class="link-row">
+      <a class="link-card" href="https://ebook.cbck.or.kr/gallery/view.asp?seq=214774" target="_blank">
+        <div class="lc-icon"><i class="ti ti-book"></i></div>
+        <div class="lc-t1">그리스도는<br>살아 계십니다</div>
+        <div class="lc-t2">e-Book 보기</div>
+      </a>
+      <a class="link-card" href="https://wydseoul.org/" target="_blank">
+        <div class="lc-icon"><i class="ti ti-world"></i></div>
+        <div class="lc-t1">2027 서울<br>세계청년대회</div>
+        <div class="lc-t2">공식 사이트</div>
+      </a>
     </div>
+
   </div>
 </div>
 
+<!-- ==============================
+     SYNOD PRAYER SCREEN
+============================== -->
 <div class="screen" id="synodScreen">
-  <div class="reader-header">
-    <button class="back-btn" onclick="showHome()" aria-label="홈"><i class="ti ti-arrow-left" style="font-size:20px" aria-hidden="true"></i></button>
-    <div class="rhtext">
-      <div class="rbadge">시노드를 위한 기도</div>
-      <div class="rtitle">주 성령님, 저희가 주님 앞에 있나이다</div>
+  <div class="ch-header">
+    <div class="ch-header-top">
+      <button class="back-btn" onclick="showScreen('homeScreen')"><i class="ti ti-arrow-left"></i></button>
+      <div class="ch-htext">
+        <div class="ch-hbadge">시노드를 위한 기도</div>
+        <div class="ch-htitle">주 성령님, 저희가 주님 앞에 있나이다</div>
+      </div>
     </div>
   </div>
-  <div class="synod-screen">
-    <p style="font-size:12px;color:var(--color-text-tertiary);margin-bottom:1rem;font-style:italic">Adsumus Sancte Spiritus</p>
-    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem">
-      <p class="synod-line-o">주 성령님,<br>저희가 주님의 이름으로 함께 모여<br>주님 앞에 있나이다.</p>
-      <p class="synod-line-b" style="margin-top:.75rem">주님만이 저희를 이끄시니 저희와 함께하시고<br>저희 마음에 머무소서.<br>저희가 나아갈 길을 보여 주시고<br>해야 할 일을 가르치소서.</p>
-      <p class="synod-line-o" style="margin-top:.75rem">나약한 죄인인 저희가 정의를 외면하여<br>혼란을 일으키지 않게 하시고<br>무지의 오류에 빠지지 않게 하소서.<br>또한 아무도 차별하지 않게 하소서.</p>
-      <p class="synod-line-b" style="margin-top:.75rem">저희가 주님 안에서 하나 되어<br>영원한 생명의 길을 함께 걸어가게 하시고<br>저희가 언제나 진리를 따르며<br>의로움을 찾게 하소서.</p>
-      <p class="synod-line-o" style="margin-top:.75rem">성부와 성자와 함께<br>영원히 친교를 이루시며<br>언제 어디서나 저희를 도우시는 성령께<br>이 모든 것을 간청하나이다.</p>
-      <p class="synod-amen" style="margin-top:.75rem">아멘.</p>
+  <div class="synod-body">
+    <div class="synod-title-block">Adsumus Sancte Spiritus</div>
+    <div class="synod-block">
+      <p class="synod-line">주 성령님,<br>저희가 주님의 이름으로 함께 모여<br>주님 앞에 있나이다.</p>
+      <div class="synod-spacer"></div>
+      <p class="synod-line bold">주님만이 저희를 이끄시니 저희와 함께하시고<br>저희 마음에 머무소서.<br>저희가 나아갈 길을 보여 주시고<br>해야 할 일을 가르치소서.</p>
+      <div class="synod-spacer"></div>
+      <p class="synod-line">나약한 죄인인 저희가 정의를 외면하여<br>혼란을 일으키지 않게 하시고<br>무지의 오류에 빠지지 않게 하소서.<br>또한 아무도 차별하지 않게 하소서.</p>
+      <div class="synod-spacer"></div>
+      <p class="synod-line bold">저희가 주님 안에서 하나 되어<br>영원한 생명의 길을 함께 걸어가게 하시고<br>저희가 언제나 진리를 따르며<br>의로움을 찾게 하소서.</p>
+      <div class="synod-spacer"></div>
+      <p class="synod-line">성부와 성자와 함께<br>영원히 친교를 이루시며<br>언제 어디서나 저희를 도우시는 성령께<br>이 모든 것을 간청하나이다.</p>
+      <div class="synod-spacer"></div>
+      <p class="synod-amen">아멘.</p>
     </div>
-    <div class="nr" style="margin-top:1.25rem"><button class="btn p" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> 홈으로</button></div>
+    <div style="background:var(--bg2);border-radius:var(--radius);padding:12px 15px;font-size:12px;color:var(--text3);line-height:1.6">
+      ○ 선창 &nbsp;● 응답 형식으로 교대로 바칩니다. (선창자: ○ 부분 / 모두: ● 부분)
+    </div>
+  </div>
+  <div class="nav-bar">
+    <button class="nav-btn home-btn" onclick="showScreen('homeScreen')" title="홈으로"><i class="ti ti-home"></i></button>
   </div>
 </div>
 
+<!-- ==============================
+     OFFICIAL PRAYER SCREEN
+============================== -->
+<div class="screen" id="officialPrayerScreen">
+  <div class="ch-header">
+    <div class="ch-header-top">
+      <button class="back-btn" onclick="showScreen('homeScreen')"><i class="ti ti-arrow-left"></i></button>
+      <div class="ch-htext">
+        <div class="ch-hbadge">2027 서울 세계청년대회</div>
+        <div class="ch-htitle">공식기도문</div>
+      </div>
+    </div>
+  </div>
+  <div class="off-prayer-body">
+    <div class="off-prayer-block">
+      <p class="off-prayer-text">젊은이를 사랑하시는 주님,<br>저희를 주님의 무한한 사랑과 자비로 초대해 주심에 감사드립니다.</p>
+      <div class="section-break"></div>
+      <p class="off-prayer-text">하느님 아버지,<br>저희 자신을 당신께 맡겨 드리오니,<br>온 세상 젊은이들이 교회의 품 안에서 위로받고<br>친교와 일치의 기쁨을 누리게 하소서.</p>
+      <div class="section-break"></div>
+      <p class="off-prayer-text">'이미 그리고 영원히' 세상을 이기신 그리스도님,<br>"용기를 내어라." 하신 당신의 말씀 안에서<br>온 세상 모든 이가 희망을 발견하고,<br>사랑과 용서의 십자가가 세상에 대한 승리임을 깨닫게 하소서.</p>
+      <div class="section-break"></div>
+      <p class="off-prayer-text">사랑의 불꽃이신 성령님,<br>당신의 놀라운 손길로 이 땅에 복음의 씨앗을 심으셨으니,<br>한국 순교 성인들의 믿음이 저희 가슴에도 타올라<br>평화와 사랑과 진리의 복음을 살아가는 제자가 되게 하소서.</p>
+      <div class="section-break"></div>
+      <p class="off-prayer-text">주님, 이 세계청년대회의 순례 여정을 통해<br>저희 모두가 서로의 목소리를 경청하고<br>그 안에서 당신의 뜻을 찾으며,<br>모든 하느님 백성이 함께 걷는 시노드 교회가 되게 하소서. 아멘</p>
+    </div>
+    <div class="off-prayer-block">
+      <div class="off-prayer-response" style="margin-bottom:.5rem">
+        <span class="mark">○</span><span>자비와 평화의 모후이시여,</span>
+      </div>
+      <div class="off-prayer-response" style="margin-bottom:.5rem">
+        <span class="mark">◎</span><span>저희를 위하여 빌어 주소서.</span>
+      </div>
+      <div class="off-prayer-response" style="margin-bottom:.5rem">
+        <span class="mark">○</span><span>서울 세계청년대회의 주보성인들이여,</span>
+      </div>
+      <div class="off-prayer-response">
+        <span class="mark">◎</span><span>모든 젊은이들을 위하여 빌어 주소서.</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <button class="nav-btn home-btn" onclick="showScreen('homeScreen')" title="홈으로"><i class="ti ti-home"></i></button>
+  </div>
+</div>
+
+<!-- ==============================
+     CHAPTER SCREEN
+============================== -->
 <div class="screen" id="chapterScreen">
-  <div class="reader-header">
-    <button class="back-btn" onclick="showHome()" aria-label="홈"><i class="ti ti-arrow-left" style="font-size:20px" aria-hidden="true"></i></button>
-    <div class="rhtext">
-      <div class="rbadge" id="chBadge"></div>
-      <div class="rtitle" id="chTitle"></div>
+  <div class="ch-header">
+    <div class="ch-header-top">
+      <button class="back-btn" onclick="showScreen('homeScreen')"><i class="ti ti-arrow-left"></i></button>
+      <div class="ch-htext">
+        <div class="ch-hbadge" id="chBadge"></div>
+        <div class="ch-htitle" id="chTitle"></div>
+      </div>
+    </div>
+    <div class="steps-row" id="stepsRow">
+      <div class="step-dot active" onclick="goSec(0)"><div class="sdot"><i class="ti ti-book-2"></i></div><div class="slabel">도입</div></div>
+      <div class="step-dot" onclick="goSec(1)"><div class="sdot"><i class="ti ti-script"></i></div><div class="slabel">말씀</div></div>
+      <div class="step-dot" onclick="goSec(2)"><div class="sdot"><i class="ti ti-pencil"></i></div><div class="slabel">묵상</div></div>
+      <div class="step-dot" onclick="goSec(3)"><div class="sdot"><i class="ti ti-users"></i></div><div class="slabel">대화</div></div>
+      <div class="step-dot" onclick="goSec(4)"><div class="sdot"><i class="ti ti-heart"></i></div><div class="slabel">활동</div></div>
+      <div class="step-dot" onclick="goSec(5)"><div class="sdot"><i class="ti ti-cross"></i></div><div class="slabel">마침</div></div>
     </div>
   </div>
-  <div class="steps-row">
-    <div class="step-dot active" onclick="goSec(0)"><div class="sdot"><i class="ti ti-book-2" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">도입</div></div>
-    <div class="step-dot" onclick="goSec(1)"><div class="sdot"><i class="ti ti-script" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">말씀</div></div>
-    <div class="step-dot" onclick="goSec(2)"><div class="sdot"><i class="ti ti-pencil" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">묵상</div></div>
-    <div class="step-dot" onclick="goSec(3)"><div class="sdot"><i class="ti ti-users" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">대화</div></div>
-    <div class="step-dot" onclick="goSec(4)"><div class="sdot"><i class="ti ti-heart" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">활동</div></div>
-    <div class="step-dot" onclick="goSec(5)"><div class="sdot"><i class="ti ti-cross" style="font-size:11px" aria-hidden="true"></i></div><div class="slabel">마침</div></div>
-  </div>
-  <div class="content" id="chContent"></div>
+  <div class="ch-body" id="chContent"></div>
+  <div class="nav-bar" id="navBar"></div>
 </div>
 
-</div>
+</div><!-- /phone-wrap -->
 
 <script>
-let curCh=0, timerSec=180, timerRunning=false, timerInterval=null;
+let curCh = 0, curSec = 0;
+let timerSec = 180, timerRunning = false, timerInterval = null;
 
-const dialogHtml = `<div class="stl">성령 안에서의 대화</div>
-<div class="ds hi"><h3>시작 기도</h3><p>시노드를 위한 기도를 함께 바칩니다. <span style="color:#C0503C;cursor:pointer;font-size:12px" onclick="showSynodInline()">▶ 기도문 보기</span></p></div>
-<div class="ds"><h3>나누고 듣기</h3><p>묵상 질문 중 나누고 싶은 주제를 선택하여 각자 3~5분씩 이야기합니다.</p></div>
-<div class="ds"><h3>성령께 귀 기울이기 Ⅰ</h3><p>3분간 침묵하며 성령께서 우리에게 무엇을 말씀하고 계신지 경청합니다.</p>
-<div class="trow"><span>침묵 타이머</span><div class="tcnt" id="td">3:00</div><button class="tbtn" id="tb" onclick="toggleTimer()">시작</button></div></div>
-<div class="ds"><h3>하느님과 다른 이들에게 마음을 열기</h3><p>나눔에서 들은 이야기 중 가장 깊은 울림이 있는 것을 각자 3~5분씩 이야기합니다.</p></div>
-<div class="ds"><h3>성령께 귀 기울이기 Ⅱ</h3><p>3분간 함께 침묵하며 성령께서 우리를 어디로 이끄시는지 성찰합니다.</p></div>
-<div class="ds"><h3>함께 만들어 나가기</h3><p>오늘 깨닫게 된 복음적 가치를 삶에서 실천하기 위한 구체적인 방법을 나눕니다.</p></div>`;
+/* ── SHARED CONTENT BLOCKS ── */
+function dialogHtml(prevSec, nextSec) {
+  return `<div class="sec-title">성령 안에서의 대화</div>
+<div class="dialog-step hi">
+  <h3>시작 기도</h3>
+  <p>시노드를 위한 기도를 함께 바칩니다. <span onclick="showScreen('synodScreen')" style="color:var(--red);cursor:pointer;font-size:12px">▶ 기도문 보기</span></p>
+</div>
+<div class="dialog-step"><h3>나누고 듣기</h3><p>묵상 질문 중 나누고 싶은 주제를 선택하여 각자 3~5분씩 이야기합니다. 다른 참가자들은 마음을 열고 경청합니다.</p></div>
+<div class="dialog-step"><h3>성령께 귀 기울이기 Ⅰ</h3><p>3분간 침묵하며 성령께서 우리에게 무엇을 말씀하고 계신지 경청합니다.</p>
+<div class="timer-row"><span>침묵 타이머</span><div class="tcnt" id="td">3:00</div><button class="tbtn" id="tb" onclick="toggleTimer()">시작</button></div></div>
+<div class="dialog-step"><h3>하느님과 다른 이들에게 마음을 열기</h3><p>나눔에서 들은 이야기 중 가장 깊은 울림이 있는 것을 각자 3~5분씩 이야기합니다.</p></div>
+<div class="dialog-step"><h3>성령께 귀 기울이기 Ⅱ</h3><p>3분간 함께 침묵하며 성령께서 우리를 어디로 이끄시는지 성찰합니다.</p></div>
+<div class="dialog-step"><h3>함께 만들어 나가기</h3><p>오늘 깨닫게 된 복음적 가치를 삶에서 실천하기 위한 구체적인 방법을 나눕니다.</p></div>`;
+}
 
-const prayerHtml = `<div class="stl">성체 안에서의 일치</div>
-<div class="pbox"><p>지극히 거룩한 성사 안에 살아 계시는 우리 주 예수님,<br>지금 성체 안에 계신 당신을 우리 안에 모실 수는 없지만<br>지극한 사랑으로 당신께 간절히 기도합니다.<br><br>성모님의 티없으시고 거룩한 마음과 함께<br>영적으로 저희의 마음에 오시어<br>저희 모두가 당신 안에서 하나 되는 은총을 내려 주소서.<br><br>우리 주 예수 그리스도를 통하여 비나이다. 아멘.</p></div>`;
+function prayerHtml() {
+  return `<div class="sec-title">성체 안에서의 일치</div>
+<div class="prayer-box"><p>지극히 거룩한 성사 안에 살아 계시는 우리 주 예수님,<br>지금 성체 안에 계신 당신을 우리 안에 모실 수는 없지만<br>지극한 사랑으로 당신께 간절히 기도합니다.<br><br>성모님의 티없으시고 거룩한 마음과 함께<br>영적으로 저희의 마음에 오시어<br>저희 모두가 당신 안에서 하나 되는 은총을 내려 주소서.<br><br>우리 주 예수 그리스도를 통하여 비나이다. 아멘.</p></div>`;
+}
 
+/* ── CHAPTERS DATA ── */
 const chapters = {
-  2:{badge:'2과',title:'우리를 부르시는 하느님',secs:[
-    `<div class="stl">2과 · 우리를 부르시는 하느님</div>
-    <div class="qbox"><p>우리가 누구인지, 우리가 받은 선물들이 무엇인지, 우리가 그 선물들을 어디에서 열매 맺게 할 수 있는지 발견할 때, 우리의 삶이 충만해집니다.</p><div class="qsrc">「제61차 성소 주일 담화」 2024년, 프란치스코 교황</div></div>
-    <p class="bt">하느님께서는 우리 한 사람 한 사람을 부르십니다. 각자의 생활 신분 안에서 복음의 아름다움을 드러내고, 사랑과 평화의 표징이 되도록 이끄십니다.</p>
-    <div class="nr"><button class="btn p" onclick="goSec(1)">시작하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+  2: {
+    badge: '2과', title: '우리를 부르시는 하느님',
+    secs: [
+      () => `<div class="sec-title">2과 · 우리를 부르시는 하느님</div>
+<div class="quote-box"><p>우리가 누구인지, 우리가 받은 선물들이 무엇인지, 우리가 그 선물들을 어디에서 열매 맺게 할 수 있는지 발견할 때, 우리의 삶이 충만해집니다.</p><div class="qsrc">「제61차 성소 주일 담화」 2024년, 프란치스코 교황</div></div>
+<p class="body-text">하느님께서는 우리 한 사람 한 사람을 부르십니다. 각자의 생활 신분 안에서 복음의 아름다움을 드러내고, 사랑과 평화의 표징이 되도록 이끄십니다.</p>
+<p class="body-text" style="font-size:13px;color:var(--text2)">위 탭을 눌러 순서대로 진행하거나 원하는 단계로 이동할 수 있습니다.</p>`,
 
-    `<div class="stl">읽어 보아요 · 마태오 14,22-33</div>
-    <div class="pb"><p>아래 글을 정성껏 읽고, 마음에 와닿는 부분에서 잠시 멈추어 보세요.</p></div>
-    <p class="bt">제자들이 호수를 건너는 이 장면은 어느 모로는 우리 삶의 여정을 연상시켜 줍니다. 우리 삶의 배는 천천히 앞으로 나아갑니다. 때로는 이 배가 항로를 벗어날 수도 있습니다.</p>
-    <p class="bt">제자들은 나자렛의 스승을 따르라고 부름받아, 용기를 가지고 주님을 따라나서는 선택을 했습니다. 그러나 밤이 되어 맞바람이 불고 배는 파도에 요동칩니다.</p>
-    <div class="qbox"><p>모든 성소는 우리를 만나러 오신 주님께서 보내시는 사랑의 눈길에서 생겨납니다.</p><div class="qsrc">「제57차 성소 주일 담화」 2020년, 프란치스코 교황</div></div>
-    <div class="nr"><button class="btn" onclick="goSec(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(2)">묵상하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">읽어 보아요 · 마태오 14,22-33</div>
+<div class="prompt-box"><p>아래 글을 정성껏 읽고, 마음에 와닿는 부분에서 잠시 멈추어 보세요.</p></div>
+<p class="body-text">제자들이 호수를 건너는 이 장면은 어느 모로는 우리 삶의 여정을 연상시켜 줍니다. 우리 삶의 배는 천천히 앞으로 나아갑니다. 때로는 이 배가 항로를 벗어날 수도 있습니다.</p>
+<p class="body-text">제자들은 나자렛의 스승을 따르라고 부름받아, 용기를 가지고 주님을 따라나서는 선택을 했습니다. 그러나 밤이 되어 맞바람이 불고 배는 파도에 요동칩니다.</p>
+<div class="quote-box"><p>모든 성소는 우리를 만나러 오신 주님께서 보내시는 사랑의 눈길에서 생겨납니다.</p><div class="qsrc">「제57차 성소 주일 담화」 2020년, 프란치스코 교황</div></div>`,
 
-    `<div class="stl">생각해 보아요</div>
-    <div class="qcard"><p class="qt">나는 언제 어떻게 신앙생활을 시작했나요?</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
-    <div class="qcard"><p class="qt">신앙생활을 하면서 하느님을 만났던 순간이 있나요? 삶 속에서 하느님께서 나를 어떻게 부르시고 이끄시는지 생각해 보세요.</p><textarea placeholder="특별한 체험이 아니어도 좋습니다..."></textarea></div>
-    <div class="nr"><button class="btn" onclick="goSec(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(3)">대화로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">나는 언제 어떻게 신앙생활을 시작했나요?</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">신앙생활을 하면서 하느님을 만났던 순간이 있나요? 삶 속에서 하느님께서 나를 어떻게 부르시고 이끄시는지 생각해 보세요.</p><textarea placeholder="특별한 체험이 아니어도 좋습니다..."></textarea></div>`,
 
-    dialogHtml+`<div class="nr"><button class="btn" onclick="goSec(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(4)">활동으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => dialogHtml(2, 4),
 
-    `<div class="stl">함께 해 보아요</div>
-    <div class="pb"><p>나에게 하느님은 어떤 분이신지 문장을 완성하고, <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 보세요.</p></div>
-    <p style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:7px">나에게 하느님은...</p>
-    <input class="mi" type="text" placeholder="빈칸에 단어나 문장을 입력하세요" oninput="updateMemo(this)" maxlength="40">
-    <div class="md" id="memoD"><span style="font-size:13px;color:var(--color-text-tertiary)">입력하면 여기에 표시됩니다</span></div>
-    <div class="nr"><button class="btn" onclick="goSec(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(5)">마침으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">함께 해 보아요</div>
+<div class="prompt-box"><p>나에게 하느님은 어떤 분이신지 문장을 완성하고, <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 보세요.</p></div>
+<p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px">나에게 하느님은...</p>
+<input class="memo-inp" type="text" placeholder="빈칸에 단어나 문장을 입력하세요" oninput="updateMemo(this)" maxlength="40">
+<div class="memo-display" id="memoD"><span style="font-size:13px;color:var(--text3)">입력하면 여기에 표시됩니다</span></div>`,
 
-    prayerHtml+`<div class="nr"><button class="btn" onclick="goSec(4)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> 홈으로</button></div>`
-  ]},
-  7:{badge:'7과',title:'함께 걷는 길',secs:[
-    `<div class="stl">7과 · 함께 걷는 길</div>
-    <div class="qbox"><p>청년 사목은 시노드의 성격을 띠지 않을 수 없습니다. 다시 말해서 '함께하는 여정'을 이루어 나갈 수 있어야 합니다. 이러한 정신으로 우리는 공동 책임의 참여 교회를 향하여 나아갈 수 있습니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 206항, 프란치스코 교황</div></div>
-    <div class="nr"><button class="btn p" onclick="goSec(1)">시작하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => prayerHtml()
+    ]
+  },
+  7: {
+    badge: '7과', title: '함께 걷는 길',
+    secs: [
+      () => `<div class="sec-title">7과 · 함께 걷는 길</div>
+<div class="quote-box"><p>청년 사목은 시노드의 성격을 띠지 않을 수 없습니다. 다시 말해서 '함께하는 여정'을 이루어 나갈 수 있어야 합니다. 이러한 정신으로 우리는 공동 책임의 참여 교회를 향하여 나아갈 수 있습니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 206항, 프란치스코 교황</div></div>`,
 
-    `<div class="stl">읽어 보아요</div>
-    <div class="en"><i class="ti ti-book" style="font-size:17px;color:var(--color-text-tertiary);flex-shrink:0;margin-top:2px" aria-hidden="true"></i><p>「그리스도는 살아 계십니다」 7장을 정성껏 읽습니다. 마음에 와닿는 부분에서 잠시 멈추어 보세요.</p></div>
-    <div class="fbox"><p>인간 존재는 자기 자신을 아낌없이 내어 주지 않으면 살아가고 발전하며 충만에 이를 수 없도록 만들어졌습니다. 유대, 친교, 형제애가 있는 곳에 삶이 존재합니다.</p><div class="fsrc">「모든 형제들」 87항, 프란치스코 교황</div></div>
-    <textarea placeholder="나의 마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다..."></textarea>
-    <div class="nr"><button class="btn" onclick="goSec(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(2)">묵상하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">읽어 보아요</div>
+<div class="ebook-note"><i class="ti ti-book"></i><p>「그리스도는 살아 계십니다」 7장을 정성껏 읽습니다. <a href="https://ebook.cbck.or.kr/gallery/view.asp?seq=214774" target="_blank">e-Book 바로가기 →</a></p></div>
+<div class="further-box"><p>인간 존재는 자기 자신을 아낌없이 내어 주지 않으면 살아가고 발전하며 충만에 이를 수 없도록 만들어졌습니다. 유대, 친교, 형제애가 있는 곳에 삶이 존재합니다.</p><div class="fsrc">「모든 형제들」 87항, 프란치스코 교황</div></div>
+<textarea placeholder="나의 마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다..."></textarea>`,
 
-    `<div class="stl">생각해 보아요</div>
-    <div class="qcard"><p class="qt">교황님께서 말씀하신 '사랑의 문법'을 실천하기 위해 우리에게 필요한 것은 무엇일까요? (「그리스도는 살아 계십니다」 211항 참고)</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
-    <div class="qcard"><p class="qt">우리가 몸담고 있는 공동체가 진정으로 젊은이를 환대하는 공동체가 되기 위해 필요한 것은 무엇일까요?</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>
-    <div class="nr"><button class="btn" onclick="goSec(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(3)">대화로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">교황님께서 말씀하신 '사랑의 문법'을 실천하기 위해 우리에게 필요한 것은 무엇일까요? (「그리스도는 살아 계십니다」 211항 참고)</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">우리가 몸담고 있는 공동체가 진정으로 젊은이를 환대하는 공동체가 되기 위해 필요한 것은 무엇일까요?</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>`,
 
-    dialogHtml+`<div class="nr"><button class="btn" onclick="goSec(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(4)">활동으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => dialogHtml(2, 4),
 
-    `<div class="stl">함께 해 보아요</div>
-    <div class="actbox"><p>공동체 전체가 환대를 표현하는 모습을 사진으로 찍습니다. 사진에 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
-    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.5rem;text-align:center;margin-bottom:1rem">
-      <i class="ti ti-camera" style="font-size:32px;color:var(--color-text-tertiary)" aria-hidden="true"></i>
-      <p style="font-size:13px;color:var(--color-text-secondary);margin-top:8px;line-height:1.5">우리 공동체의 환대하는 모습을<br>사진으로 담아 함께 나눠 보세요</p>
-      <p style="font-size:12px;color:#C0503C;margin-top:7px;font-weight:500">@wydseoul2027</p>
-    </div>
-    <div class="nr"><button class="btn" onclick="goSec(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(5)">마침으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">함께 해 보아요</div>
+<div class="act-box"><p>공동체 전체가 환대를 표현하는 모습을 사진으로 찍습니다. <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
+<div class="center-box"><i class="ti ti-camera cb-icon"></i><p>우리 공동체의 환대하는 모습을<br>사진으로 담아 함께 나눠 보세요</p><div class="cb-tag">@wydseoul2027</div></div>`,
 
-    prayerHtml+`<div class="nr"><button class="btn" onclick="goSec(4)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> 홈으로</button></div>`
-  ]},
-  8:{badge:'8과',title:'부르심과 식별',secs:[
-    `<div class="stl">8과 · 부르심과 식별</div>
-    <div class="qbox"><p>'성소'라는 말은 넓은 의미에서, 생명으로 부르심, 주님과 나누는 우정으로 부르심, 성덕으로 부르심 등을 다 아우르는 하느님의 부르심으로 이해할 수 있습니다. 주님께서는 우리를 위한 놀라운 계획을 마련해 두신 분이십니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 248항, 프란치스코 교황</div></div>
-    <div class="nr"><button class="btn p" onclick="goSec(1)">시작하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => prayerHtml()
+    ]
+  },
+  8: {
+    badge: '8과', title: '부르심과 식별',
+    secs: [
+      () => `<div class="sec-title">8과 · 부르심과 식별</div>
+<div class="quote-box"><p>'성소'라는 말은 넓은 의미에서, 생명으로 부르심, 주님과 나누는 우정으로 부르심, 성덕으로 부르심 등을 다 아우르는 하느님의 부르심으로 이해할 수 있습니다. 주님께서는 우리를 위한 놀라운 계획을 마련해 두신 분이십니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 248항, 프란치스코 교황</div></div>`,
 
-    `<div class="stl">읽어 보아요</div>
-    <div class="en"><i class="ti ti-book" style="font-size:17px;color:var(--color-text-tertiary);flex-shrink:0;margin-top:2px" aria-hidden="true"></i><p>「그리스도는 살아 계십니다」 8~9장을 정성껏 읽습니다. 마음에 와닿는 부분에서 잠시 멈추어 보세요.</p></div>
-    <div class="qbox"><p>우리가 우리 성소에 응답하려면, 자신의 있는 그대로의 모든 면을 증진하고 싹틔우고 키울 필요가 있습니다. 이는 하느님의 빛 안에서 참된 자신을 발견하고 자신의 삶을 꽃피워 열매 맺는 것입니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 257항, 프란치스코 교황</div></div>
-    <textarea placeholder="나의 마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다..."></textarea>
-    <div class="nr"><button class="btn" onclick="goSec(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(2)">묵상하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">읽어 보아요</div>
+<div class="ebook-note"><i class="ti ti-book"></i><p>「그리스도는 살아 계십니다」 8~9장을 정성껏 읽습니다. <a href="https://ebook.cbck.or.kr/gallery/view.asp?seq=214774" target="_blank">e-Book 바로가기 →</a></p></div>
+<div class="quote-box"><p>우리가 우리 성소에 응답하려면, 자신의 있는 그대로의 모든 면을 증진하고 싹틔우고 키울 필요가 있습니다. 이는 하느님의 빛 안에서 참된 자신을 발견하고 자신의 삶을 꽃피워 열매 맺는 것입니다.</p><div class="qsrc">「그리스도는 살아 계십니다」 257항, 프란치스코 교황</div></div>
+<textarea placeholder="나의 마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다..."></textarea>`,
 
-    `<div class="stl">생각해 보아요</div>
-    <div class="qcard"><p class="qt">하느님께서 나에게 주신 가장 큰 선물은 무엇일까요?</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
-    <div class="qcard"><p class="qt">나를 사랑하시는 하느님께서는 내가 어떠한 모습이 되기를 바라실까요? 하느님께서 바라시는 '참다운 나'가 되기 위해 어떻게 노력해야 할지 생각해 봅시다.</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>
-    <div class="nr"><button class="btn" onclick="goSec(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(3)">대화로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">하느님께서 나에게 주신 가장 큰 선물은 무엇일까요?</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">나를 사랑하시는 하느님께서는 내가 어떠한 모습이 되기를 바라실까요? 하느님께서 바라시는 '참다운 나'가 되기 위해 어떻게 노력해야 할지 생각해 봅시다.</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>`,
 
-    dialogHtml+`<div class="nr"><button class="btn" onclick="goSec(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(4)">활동으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => dialogHtml(2, 4),
 
-    `<div class="stl">함께 해 보아요</div>
-    <div class="actbox"><p>종이 위에 커다란 하트를 그리고, 그 안에 각자가 하느님께 받은 가장 소중한 것을 글로 적거나 그림으로 그려 봅시다. 완성되면 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
-    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;text-align:center;margin-bottom:1rem">
-      <svg viewBox="0 0 120 100" width="100" height="84" style="display:block;margin:0 auto">
-        <path d="M60,82 C60,82 12,54 12,30 C12,16 22,9 36,9 C46,9 56,16 60,23 C64,16 74,9 84,9 C98,9 108,16 108,30 C108,54 60,82 60,82Z" fill="none" stroke="#C0503C" stroke-width="2.5" stroke-dasharray="4,3"/>
-        <text x="60" y="46" text-anchor="middle" font-size="9" fill="#993C1D">하느님께 받은</text>
-        <text x="60" y="59" text-anchor="middle" font-size="9" fill="#993C1D">소중한 것은?</text>
-      </svg>
-      <p style="font-size:12px;color:var(--color-text-tertiary);margin-top:8px">종이에 직접 그리고 적어 보세요</p>
-    </div>
-    <div class="nr"><button class="btn" onclick="goSec(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(5)">마침으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">함께 해 보아요</div>
+<div class="act-box"><p>종이 위에 커다란 하트를 그리고, 그 안에 각자가 하느님께 받은 가장 소중한 것을 글로 적거나 그림으로 그려 봅시다. 완성되면 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
+<div class="center-box">
+<svg viewBox="0 0 120 100" width="100" height="84" style="display:block;margin:0 auto">
+  <path d="M60,82 C60,82 12,54 12,30 C12,16 22,9 36,9 C46,9 56,16 60,23 C64,16 74,9 84,9 C98,9 108,16 108,30 C108,54 60,82 60,82Z" fill="none" stroke="#C0503C" stroke-width="2.5" stroke-dasharray="4,3"/>
+  <text x="60" y="44" text-anchor="middle" font-size="9" fill="#993C1D" font-family="sans-serif">하느님께 받은</text>
+  <text x="60" y="57" text-anchor="middle" font-size="9" fill="#993C1D" font-family="sans-serif">소중한 것은?</text>
+</svg>
+<p>종이에 직접 그리고 적어 보세요</p><div class="cb-tag">@wydseoul2027</div></div>`,
 
-    prayerHtml+`<div class="fbox" style="margin-top:0"><p>그리스도는 몸이 없지만 당신은 가지고 있습니다. 당신의 눈을 통해서 그리스도의 자비로운 눈이 세상을 바라봅니다. 당신의 손으로 그리스도는 축복을 줍니다.</p><div class="fsrc">아빌라의 데레사 성녀</div></div>
-    <div class="nr"><button class="btn" onclick="goSec(4)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> 홈으로</button></div>`
-  ]},
-  9:{badge:'9과',title:'가자! 갈릴래아로!',secs:[
-    `<div class="stl">9과 · 가자! 갈릴래아로!</div>
-    <div class="qbox"><p>그분께서는 죽은 이들 가운데에서 되살아나셨습니다. 이제 여러분보다 먼저 갈릴래아로 가실 터이니, 여러분은 그분을 거기에서 뵙게 될 것입니다.</p><div class="qsrc">마태오 28,7</div></div>
-    <p class="bt">여기서 갈릴래아는 바로 우리가 매일 숨쉬며 살아가는 각자의 삶입니다. '각자의 삶의 자리로 돌아가 우리가 보고 듣고 느낀 모든 것을 실천하고 전하는 것', 이것이 바로 우리가 걸어온 여정의 마지막 결실이며 동시에 새로운 시작입니다.</p>
-    <div class="nr"><button class="btn p" onclick="goSec(1)">시작하기 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => prayerHtml() + `<div class="further-box" style="margin-top:1rem"><p>그리스도는 몸이 없지만 당신은 가지고 있습니다. 당신의 눈을 통해서 그리스도의 자비로운 눈이 세상을 바라봅니다. 당신의 손으로 그리스도는 축복을 줍니다.</p><div class="fsrc">아빌라의 데레사 성녀</div></div>`
+    ]
+  },
+  9: {
+    badge: '9과', title: '가자! 갈릴래아로!',
+    secs: [
+      () => `<div class="sec-title">9과 · 가자! 갈릴래아로!</div>
+<div class="quote-box"><p>그분께서는 죽은 이들 가운데에서 되살아나셨습니다. 이제 여러분보다 먼저 갈릴래아로 가실 터이니, 여러분은 그분을 거기에서 뵙게 될 것입니다.</p><div class="qsrc">마태오 28,7</div></div>
+<p class="body-text">여기서 갈릴래아는 바로 우리가 매일 숨쉬며 살아가는 각자의 삶입니다. '각자의 삶의 자리로 돌아가 우리가 보고 듣고 느낀 모든 것을 실천하고 전하는 것', 이것이 바로 우리가 걸어온 여정의 마지막 결실이며 동시에 새로운 시작입니다.</p>`,
 
-    `<div class="stl">하느님께 드리는 감사의 편지</div>
-    <div class="pb"><p>그동안 주님 안에 하나 되어 공동체와 함께 생각하고 나누고 기록한 워크북을 다시 열어 봅시다. 이 여정 가운데 가장 기억에 남는 것은 무엇인지 또 그 이유는 무엇인지 생각해 봅시다.</p></div>
-    <p style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:7px">예수님께 감사의 편지를 써 봅시다</p>
-    <textarea style="min-height:130px" placeholder="이 모든 것에 감사하는 마음을 담아 예수님께..."></textarea>
-    <div class="nr"><button class="btn" onclick="goSec(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(2)">묵상으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">하느님께 드리는 감사의 편지</div>
+<div class="prompt-box"><p>그동안 공동체와 함께 생각하고 나누고 기록한 워크북을 다시 열어 봅시다. 이 여정 가운데 가장 기억에 남는 것은 무엇인지 또 그 이유는 무엇인지 생각해 봅시다.</p></div>
+<p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px">예수님께 감사의 편지를 써 봅시다</p>
+<textarea style="min-height:130px" placeholder="이 모든 것에 감사하는 마음을 담아 예수님께..."></textarea>`,
 
-    `<div class="stl">생각해 보아요</div>
-    <div class="qcard"><p class="qt">2027년 서울 세계청년대회WYD의 주제 성구는 "용기를 내어라. 내가 세상을 이겼다."(요한 16,33)입니다. 교황님께서 WYD를 준비하는 우리에게 이 말씀을 선포하신 이유가 무엇일까요? 이 말씀을 살아가기 위해 지금 우리에게 필요한 것은 무엇인지 나누어 봅시다.</p><textarea placeholder="생각을 자유롭게 적어 보세요..."></textarea></div>
-    <div class="nr"><button class="btn" onclick="goSec(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(3)">대화로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">2027년 서울 세계청년대회WYD의 주제 성구는 "용기를 내어라. 내가 세상을 이겼다."(요한 16,33)입니다. 교황님께서 WYD를 준비하는 우리에게 이 말씀을 선포하신 이유가 무엇일까요? 이 말씀을 살아가기 위해 지금 우리에게 필요한 것은 무엇인지 나누어 봅시다.</p><textarea placeholder="생각을 자유롭게 적어 보세요..."></textarea></div>`,
 
-    dialogHtml+`<div class="nr"><button class="btn" onclick="goSec(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(4)">활동으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => dialogHtml(2, 4),
 
-    `<div class="stl">함께 해 보아요 · 롤링 페이퍼</div>
-    <div class="actbox"><p>이 여정을 함께한 공동체원 모두에게 감사 편지(롤링 페이퍼)를 전해 봅시다. 편지지 맨 위에 본인의 이름을 쓴 후 옆 사람에게 건네고, 받은 사람은 그 사람에게 전하고 싶은 말을 적습니다. 모두 작성이 끝나면 워크북을 들고 단체 사진을 찍어 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
-    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;text-align:center;margin-bottom:1rem">
-      <i class="ti ti-mail" style="font-size:30px;color:var(--color-text-tertiary)" aria-hidden="true"></i>
-      <p style="font-size:13px;color:var(--color-text-secondary);margin-top:8px;line-height:1.5">서로에게 감사의 마음을 담아<br>롤링 페이퍼를 나누어 보세요</p>
-      <p style="font-size:12px;color:#C0503C;margin-top:7px;font-weight:500">@wydseoul2027</p>
-    </div>
-    <div class="nr"><button class="btn" onclick="goSec(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="goSec(5)">마침으로 <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>`,
+      () => `<div class="sec-title">함께 해 보아요 · 롤링 페이퍼</div>
+<div class="act-box"><p>이 여정을 함께한 공동체원 모두에게 감사 편지(롤링 페이퍼)를 전해 봅시다. 편지지 맨 위에 본인의 이름을 쓴 후 옆 사람에게 건네고, 받은 사람은 감사한 마음을 적습니다. 모두 작성이 끝나면 워크북을 들고 단체 사진을 찍어 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
+<div class="center-box"><i class="ti ti-mail cb-icon"></i><p>서로에게 감사의 마음을 담아<br>롤링 페이퍼를 나누어 보세요</p><div class="cb-tag">@wydseoul2027</div></div>`,
 
-    prayerHtml+`<div class="fbox" style="margin-top:0"><p>'2027 서울 WYD' 순례자들은 자신이 깨닫게 된 복음의 기쁨을 각자의 삶에서 담대히 실천하는 '용기 가득한 선교사'로 세상에 파견될 것입니다.</p><div class="fsrc">정순택 대주교, '2027 서울 WYD' 주제 성구 발표 기자회견 중</div></div>
-    <div style="background:#FDF3F0;border-radius:var(--border-radius-lg);padding:1rem;text-align:center;margin-bottom:1rem">
-      <p style="font-size:13px;color:#712B13;font-weight:500;margin-bottom:4px">워크북 전 과정을 마쳤습니다</p>
-      <p style="font-size:12px;color:#993C1D">용기를 내어라. 내가 세상을 이겼다. — 요한 16,33</p>
-    </div>
-    <div class="nr"><button class="btn" onclick="goSec(4)"><i class="ti ti-arrow-left" aria-hidden="true"></i></button><button class="btn p" onclick="showHome()"><i class="ti ti-home" aria-hidden="true"></i> 홈으로</button></div>`
-  ]}
+      () => prayerHtml() + `<div class="further-box" style="margin-top:1rem"><p>'2027 서울 WYD' 순례자들은 자신이 깨닫게 된 복음의 기쁨을 각자의 삶에서 담대히 실천하는 '용기 가득한 선교사'로 세상에 파견될 것입니다.</p><div class="fsrc">정순택 대주교, '2027 서울 WYD' 주제 성구 발표 기자회견 중</div></div>
+<div class="finish-banner"><div class="fb-t1">워크북 전 과정을 마쳤습니다</div><div class="fb-t2">용기를 내어라. 내가 세상을 이겼다. — 요한 16,33</div></div>`
+    ]
+  }
 };
 
-function showHome(){
-  document.getElementById('homeScreen').classList.add('active');
-  document.getElementById('synodScreen').classList.remove('active');
-  document.getElementById('chapterScreen').classList.remove('active');
+/* ── NAVIGATION ── */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
   resetTimer();
 }
-function showSynod(){
-  document.getElementById('homeScreen').classList.remove('active');
-  document.getElementById('synodScreen').classList.add('active');
-  document.getElementById('chapterScreen').classList.remove('active');
-}
-function showSynodInline(){
-  document.getElementById('homeScreen').classList.remove('active');
-  document.getElementById('synodScreen').classList.add('active');
-  document.getElementById('chapterScreen').classList.remove('active');
-}
-function openCh(n){
-  curCh=n;
-  document.getElementById('homeScreen').classList.remove('active');
-  document.getElementById('synodScreen').classList.remove('active');
-  document.getElementById('chapterScreen').classList.add('active');
-  document.getElementById('chBadge').textContent=chapters[n].badge;
-  document.getElementById('chTitle').textContent=chapters[n].title;
+
+function openCh(n) {
+  curCh = n;
+  document.getElementById('chBadge').textContent = chapters[n].badge;
+  document.getElementById('chTitle').textContent = chapters[n].title;
+  showScreen('chapterScreen');
   goSec(0);
 }
-function goSec(n){
-  document.querySelectorAll('.step-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
-  document.getElementById('chContent').innerHTML=chapters[curCh].secs[n];
+
+function goSec(n) {
+  curSec = n;
+  const ch = chapters[curCh];
+  document.getElementById('chContent').innerHTML = ch.secs[n]();
+  document.querySelectorAll('.step-dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  document.getElementById('chContent').scrollTop = 0;
+  document.querySelector('.ch-body').scrollTop = 0;
+
+  // Build nav bar
+  const nav = document.getElementById('navBar');
+  nav.innerHTML = '';
+  // Home
+  const homeBtn = document.createElement('button');
+  homeBtn.className = 'nav-btn home-btn';
+  homeBtn.title = '홈으로';
+  homeBtn.innerHTML = '<i class="ti ti-home"></i>';
+  homeBtn.onclick = () => showScreen('homeScreen');
+  nav.appendChild(homeBtn);
+
+  // Prev
+  if (n > 0) {
+    const prev = document.createElement('button');
+    prev.className = 'nav-btn';
+    prev.innerHTML = '<i class="ti ti-arrow-left"></i> 이전';
+    prev.onclick = () => goSec(n - 1);
+    nav.appendChild(prev);
+  }
+
+  // Next
+  if (n < ch.secs.length - 1) {
+    const labels = ['말씀으로', '묵상으로', '대화로', '활동으로', '마침으로'];
+    const next = document.createElement('button');
+    next.className = 'nav-btn pri';
+    next.innerHTML = (labels[n] || '다음') + ' <i class="ti ti-arrow-right"></i>';
+    next.onclick = () => goSec(n + 1);
+    nav.appendChild(next);
+  } else {
+    const done = document.createElement('button');
+    done.className = 'nav-btn pri';
+    done.innerHTML = '<i class="ti ti-home"></i> 홈으로';
+    done.onclick = () => showScreen('homeScreen');
+    nav.appendChild(done);
+  }
+
   resetTimer();
 }
-function resetTimer(){clearInterval(timerInterval);timerRunning=false;timerSec=180;}
-function toggleTimer(){
-  const td=document.getElementById('td'),tb=document.getElementById('tb');
-  if(!td||!tb) return;
-  if(timerRunning){clearInterval(timerInterval);timerRunning=false;tb.textContent='계속';}
-  else{
-    timerRunning=true;tb.textContent='정지';
-    timerInterval=setInterval(()=>{
-      if(timerSec<=0){clearInterval(timerInterval);timerRunning=false;if(td)td.textContent='완료';if(tb)tb.textContent='다시';timerSec=180;return;}
+
+/* ── TIMER ── */
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSec = 180;
+}
+function toggleTimer() {
+  const td = document.getElementById('td');
+  const tb = document.getElementById('tb');
+  if (!td || !tb) return;
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    tb.textContent = '계속';
+  } else {
+    timerRunning = true;
+    tb.textContent = '정지';
+    timerInterval = setInterval(() => {
+      if (timerSec <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        if (td) td.textContent = '완료';
+        if (tb) tb.textContent = '다시';
+        timerSec = 180;
+        return;
+      }
       timerSec--;
-      let m=Math.floor(timerSec/60),s=timerSec%60;
-      if(td)td.textContent=m+':'+(s<10?'0':'')+s;
-    },1000);
+      const m = Math.floor(timerSec / 60), s = timerSec % 60;
+      if (td) td.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
   }
 }
-function updateMemo(el){
-  const v=el.value.trim(),d=document.getElementById('memoD');
-  if(!d)return;
-  d.innerHTML=v?'<span style="font-size:13px;color:var(--color-text-tertiary)">나에게 하느님은</span><br><strong style="font-size:18px;color:#412402">'+v+'</strong><br><span style="font-size:13px;color:var(--color-text-tertiary)">이시다</span>':'<span style="font-size:13px;color:var(--color-text-tertiary)">입력하면 여기에 표시됩니다</span>';
+
+/* ── MEMO ── */
+function updateMemo(el) {
+  const v = el.value.trim();
+  const d = document.getElementById('memoD');
+  if (!d) return;
+  d.innerHTML = v
+    ? '<span style="font-size:13px;color:var(--text3)">나에게 하느님은</span><br><strong style="font-size:18px;color:#412402">' + v + '</strong><br><span style="font-size:13px;color:var(--text3)">이시다</span>'
+    : '<span style="font-size:13px;color:var(--text3)">입력하면 여기에 표시됩니다</span>';
 }
 </script>
+</body>
+</html>
