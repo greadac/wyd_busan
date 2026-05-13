@@ -498,7 +498,7 @@ textarea:focus { outline: none; border-color: var(--red); }
   <div class="home-header">
     <div class="home-badge">CHRISTUS VIVIT · 2027 서울 WYD</div>
     <div class="home-title">그리스도는<br>살아 계십니다</div>
-    <div class="home-sub">워크북 인터랙티브 앱 · 4개 과 수록</div>
+    <div class="home-sub">워크북 인터랙티브 앱 · 6개 과 수록</div>
   </div>
   <div class="home-body">
 
@@ -521,9 +521,19 @@ textarea:focus { outline: none; border-color: var(--red); }
     </div>
 
     <div class="section-label">과목</div>
+    <div class="ch-card" onclick="openCh(1)">
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">1과 · 여행을 떠나며</div><div class="t2">나 너 그리고 우리 · 자기 발견과 관계</div></div>
+      <div class="ch-badge">완료</div>
+    </div>
     <div class="ch-card" onclick="openCh(2)">
       <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
       <div class="ch-info"><div class="t1">2과 · 우리를 부르시는 하느님</div><div class="t2">마태오 14,22-33 · 성소와 부르심</div></div>
+      <div class="ch-badge">완료</div>
+    </div>
+    <div class="ch-card" onclick="openCh(3)">
+      <div class="ch-num"><i class="ti ti-check" style="font-size:15px"></i></div>
+      <div class="ch-info"><div class="t1">3과 · 길 위에 선 나와 너, 그리고 하느님</div><div class="t2">가치관 · 삶의 목표와 하느님의 뜻</div></div>
       <div class="ch-badge">완료</div>
     </div>
     <div class="ch-card" onclick="openCh(7)">
@@ -694,6 +704,82 @@ function prayerHtml() {
 
 /* ── CHAPTERS DATA ── */
 const chapters = {
+  1: {
+    badge: '1과', title: '여행을 떠나며 – 나 너 그리고 우리',
+    secs: [
+      () => `<div class="sec-title">1과 · 여행을 떠나며 – 나 너 그리고 우리</div>
+<div class="quote-box"><p>'나는 누구인가?' 우리는 살아가면서 이렇게 자문하며 시간을 허비하는 경우가 너무 많습니다. 그러나 정작 우리가 해야 할 참다운 질문은 바로 이것입니다. '나는 누구를 위하여 존재하는가?'</p><div class="qsrc">「그리스도는 살아 계십니다」 286항, 프란치스코 교황</div></div>
+<p class="body-text">이 여정의 첫 걸음은 '나'를 발견하고, '너'를 만나며, 함께 '우리'가 되어 가는 것입니다.</p>
+<p class="body-text" style="font-size:13px;color:var(--text2)">위 탭을 눌러 순서대로 진행하거나 원하는 단계로 이동할 수 있습니다.</p>`,
+
+      function() {
+        var items = [
+          {q:'뜨아 vs 아아', ph:'뜨아 / 아아'},
+          {q:'좋아하는 계절', ph:'봄/여름/가을/겨울'},
+          {q:'활동하는 단체', ph:'단체 이름'},
+          {q:'나만의 기도 시간', ph:'몇 시?'},
+          {q:'좋아하는 음식', ph:'음식 이름'},
+          {q:'성당에서 가장\n좋아하는 곳', ph:'예: 감실 앞'},
+          {q:'성인이 되어\n세례를 받았나요?', ph:'O / X'},
+          {q:'최애 영화\n또는 드라마', ph:'제목'},
+          {q:'평일 아침\n기상 시간', ph:'5/6/7/8/9시~'},
+          {q:'나의 MBTI', ph:'예: INFJ'},
+          {q:'산 vs 바다', ph:'산 / 바다'},
+          {q:'견진성사를\n받았나요?', ph:'O / X'},
+          {q:'고해성사 본 지\n얼마나 되었나요?', ph:'1달/3달/6달~'},
+          {q:'쉬는 날 나는?', ph:'집 / 밖'},
+          {q:'나의 취미', ph:'취미'},
+          {q:'짜장면 vs 짬뽕', ph:'짜장 / 짬뽕'}
+        ];
+        var cells = '';
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          cells += '<div class="bingo-cell" id="bc' + i + '" onclick="toggleBingo(' + i + ')">'
+            + '<div class="bingo-check">✓</div>'
+            + '<div class="bingo-q">' + item.q.replace(/\n/g, '<br>') + '</div>'
+            + '<input class="bingo-inp" type="text" placeholder="' + item.ph + '" onclick="event.stopPropagation()" id="ba' + i + '">'
+            + '<input class="bingo-name-inp" type="text" placeholder="친구 이름" onclick="event.stopPropagation()" id="bn' + i + '">'
+            + '</div>';
+        }
+        return '<div class="sec-title">만나서 반갑습니다 · 빙고 게임</div>'
+          + '<div class="prompt-box"><p>① 각 칸의 질문에 나의 답을 적습니다.<br>② 돌아다니며 나와 같은 답을 쓴 사람을 만나면 친구 이름을 쓰고 칸을 탭해 채웁니다.<br>③ 먼저 2줄을 완성한 사람이 "빙고!"를 외칩니다.</p></div>'
+          + '<style>'
+          + '.bingo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:.75rem}'
+          + '.bingo-cell{background:white;border:1.5px solid var(--border);border-radius:8px;padding:6px 4px;font-size:9.5px;color:var(--text2);text-align:center;line-height:1.3;cursor:pointer;transition:all .18s;user-select:none;-webkit-user-select:none;position:relative}'
+          + '.bingo-cell.matched{background:var(--red);border-color:#A84030;color:white}'
+          + '.bingo-cell.matched .bingo-q{color:rgba(255,255,255,.9)}'
+          + '.bingo-cell.matched .bingo-inp{color:white;border-bottom-color:rgba(255,255,255,.4)}'
+          + '.bingo-cell.matched .bingo-inp::placeholder{color:rgba(255,255,255,.5)}'
+          + '.bingo-cell.matched .bingo-name-inp{color:white;border-bottom-color:rgba(255,255,255,.4)}'
+          + '.bingo-cell.matched .bingo-name-inp::placeholder{color:rgba(255,255,255,.5)}'
+          + '.bingo-q{font-size:9px;color:inherit;line-height:1.3;margin-bottom:4px}'
+          + '.bingo-inp{width:100%;border:none;border-bottom:1px solid var(--border);font-size:9px;padding:1px 0;text-align:center;background:transparent;font-family:inherit;color:var(--text);outline:none;margin-bottom:3px}'
+          + '.bingo-inp::placeholder{color:var(--text3)}'
+          + '.bingo-name-inp{width:100%;border:none;border-bottom:1px dashed var(--border2);font-size:8.5px;padding:1px 0;text-align:center;background:transparent;font-family:inherit;color:var(--text2);outline:none}'
+          + '.bingo-name-inp::placeholder{color:var(--text3)}'
+          + '.bingo-check{position:absolute;top:3px;right:4px;font-size:10px;display:none}'
+          + '.bingo-cell.matched .bingo-check{display:block}'
+          + '.bingo-status{font-size:12px;font-weight:500;color:var(--red);text-align:center;padding:8px 0;min-height:28px}'
+          + '</style>'
+          + '<div class="bingo-grid" id="bingoGrid">' + cells + '</div>'
+          + '<div class="bingo-status" id="bingoStatus">칸을 탭하면 완성 표시가 됩니다</div>'
+          + '<div class="further-box"><p>빙고가 끝나면 공동체 안에서 새롭게 알게 된 사실을 나누어 봅시다.</p></div>';
+      },
+
+      () => `<div class="sec-title">읽어 보아요 · 「신앙과 이성」 1항</div>
+<div class="prompt-box"><p>아래 글을 정성껏 읽고, 마음에 와닿는 부분이 있다면 잠시 멈추어 생각합니다.</p></div>
+<div class="further-box"><p>동서양을 막론하고 우리는 역사 속에서 인류가 진리를 추구하기 시작하여 점점 더 깊이 투신하여 왔음을 확인할 수 있습니다. 델피 신전의 문설주에 새겨진 "너 자신을 알라!"는 권고는, 자신들의 모습을 추구하는 인간 존재자들에게 최소한의 규범으로 받아들여져야 하는 기본 진리를 증언해 주고 있습니다.</p><div class="fsrc">「신앙과 이성」 1항, 성 요한 바오로 2세 교황</div></div>
+<div class="q-card"><p class="qt">마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다.</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>`,
+
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">'나'는 누구인가요? 다른 사람들이 나에 대해 칭찬하는 점은 무엇인지, 또 나만 아는 나의 장점과 재능은 무엇인지 생각해 보고 적어 봅시다.</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">예수님께서는 "내가 너희에게 새 계명을 준다. 서로 사랑하여라. 내가 너희를 사랑한 것처럼 너희도 서로 사랑하여라."(요한 13,34)라고 말씀하십니다. 함께 살아가는 '나'가 되기 위해 지금 나에게 가장 필요한 것은 무엇인지 적어 봅시다.</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>`,
+
+      () => dialogHtml(3, 5),
+
+      () => prayerHtml() + `<div class="further-box" style="margin-top:1rem"><p>우리가 삶에서 수차례 경험해 본 어두운 밤들에도 하느님께서는 우리를 버려두지 않으시고 현존하시어, '나는 누구인가?', '나는 어디에서 왔는가?', '나는 왜 이 시대에 태어났는가?'라는 궁극적인 질문들에 응답하십니다.</p><div class="fsrc">「놀라운 표징」 4항, 프란치스코 교황</div></div>`
+    ]
+  },
   2: {
     badge: '2과', title: '우리를 부르시는 하느님',
     secs: [
@@ -721,6 +807,34 @@ const chapters = {
 <div class="memo-display" id="memoD"><span style="font-size:13px;color:var(--text3)">입력하면 여기에 표시됩니다</span></div>`,
 
       () => prayerHtml()
+    ]
+  },
+  3: {
+    badge: '3과', title: '길 위에 선 나와 너, 그리고 하느님',
+    secs: [
+      () => `<div class="sec-title">3과 · 길 위에 선 나와 너, 그리고 하느님</div>
+<div class="quote-box"><p>우리는 이렇게 질문해야 합니다. '내 겉모습이나 감정들 말고, 나는 나 자신을 알고 있는가?', '나의 장점과 약점은 무엇인가?' 그리고 '어떻게 하면 내가 사람들에게 더 잘 봉사하고, 세상과 교회에 더 보탬이 될 수 있을까?'</p><div class="qsrc">「그리스도는 살아 계십니다」 285항, 프란치스코 교황</div></div>
+<p class="body-text">삶의 목표를 찾는 길은 외면이 아닌 내면의 질문에서 시작됩니다. 그 길 위에서 하느님께서 우리와 함께 걸으십니다.</p>
+<p class="body-text" style="font-size:13px;color:var(--text2)">위 탭을 눌러 순서대로 진행하거나 원하는 단계로 이동할 수 있습니다.</p>`,
+
+      () => `<div class="sec-title">읽어 보아요 · 베네딕토 16세, 프란치스코 교황</div>
+<div class="prompt-box"><p>아래 글을 정성껏 읽고, 마음에 와닿는 부분이 있다면 잠시 멈추어 생각합니다.</p></div>
+<div class="further-box"><p>"당신 안에 쉬기까지 우리 마음에는 안식이 없나이다."(「고백록」) — 아우구스티노 성인의 이 고백처럼, 더욱 의미 있는 삶에 대한 열망은 하느님께서 우리를 창조하셨고 우리에게 그분의 '인호'가 새겨져 있다는 징표입니다. 하느님은 생명이십니다.</p><div class="fsrc">베네딕토 16세 교황 말씀 중</div></div>
+<div class="further-box"><p>많은 젊은이들이 삶의 확실한 준거를 갖지 못하여 크게 불안해하고 있습니다. 어린 나무가 깊이 뿌리 내려 열매를 맺을 수 있는 튼튼한 나무로 자라기까지 한결같은 보살핌이 필요하듯, 젊은이 여러분도 확고한 판단 기준을 물려받을 권리가 있습니다.</p><div class="fsrc">「제26차 청소년 주일 담화」 2011년, 베네딕토 16세 교황</div></div>
+<div class="q-card"><p class="qt">마음에 어떠한 울림이 있었는지, 그 이유는 무엇인지 적어 봅시다.</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>`,
+
+      () => `<div class="sec-title">생각해 보아요</div>
+<div class="q-card"><p class="qt">지금 나에게 가장 소중하고 가치 있는 것은 무엇인가요?</p><textarea placeholder="자유롭게 적어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">삶의 마지막에 내가 이루고 싶은 꿈 또는 목표가 있다면 무엇인가요?</p><textarea placeholder="생각을 나누어 보세요..."></textarea></div>
+<div class="q-card"><p class="qt">나의 꿈과 목표를 이루는 삶 속에서 하느님께서 나에게 바라시는 것이 있다면 무엇일까요?</p><textarea placeholder="하느님의 시각으로 생각해 보세요..."></textarea></div>`,
+
+      () => dialogHtml(3, 5),
+
+      () => `<div class="sec-title">함께 해 보아요</div>
+<div class="act-box"><p>종이 한 장에 공동체 모두가 각자 삶의 목표를 그림으로 그려 하나의 세상을 만들어 봅시다. 완성된 그림을 사진으로 찍고 <strong>@wydseoul2027</strong>을 태그하여 SNS에 업로드해 봅시다.</p></div>
+<div class="center-box"><i class="ti ti-pencil cb-icon"></i><p>종이 위에 나의 삶의 목표를<br>그림으로 그려 함께 세상을 만들어 보세요</p><div class="cb-tag">@wydseoul2027</div></div>`,
+
+      () => prayerHtml() + `<div class="further-box" style="margin-top:1rem"><p>우리는 죽음 이후에 어떻게 될까요? 우리는 예수님과 함께 이 죽음의 문턱을 넘어 영원히 하느님의 무한한 사랑을 바라보고 그 사랑에 참여하면서 하느님과의 충만한 친교 안에 있는 영원한 생명을 얻을 것입니다. 행복은 우리 인간의 소명이고, 모든 이가 열망하는 목표입니다.</p><div class="fsrc">2025년 정기 희년 선포 칙서 「희망은 우리를 부끄럽게 하지 않습니다」, 프란치스코 교황</div></div>`
     ]
   },
   7: {
@@ -824,6 +938,7 @@ function goSec(n) {
   curSec = n;
   const ch = chapters[curCh];
   document.getElementById('chContent').innerHTML = ch.secs[n]();
+  resetBingo();
   document.querySelectorAll('.step-dot').forEach((d, i) => d.classList.toggle('active', i === n));
   document.getElementById('chContent').scrollTop = 0;
   document.querySelector('.ch-body').scrollTop = 0;
@@ -898,6 +1013,28 @@ function toggleTimer() {
       if (td) td.textContent = m + ':' + (s < 10 ? '0' : '') + s;
     }, 1000);
   }
+}
+
+/* ── BINGO ── */
+var bingoState = Array(16).fill(false);
+var BINGO_LINES = [[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15],[0,4,8,12],[1,5,9,13],[2,6,10,14],[3,7,11,15],[0,5,10,15],[3,6,9,12]];
+
+function toggleBingo(i) {
+  bingoState[i] = !bingoState[i];
+  var cell = document.getElementById('bc' + i);
+  if (cell) cell.classList.toggle('matched', bingoState[i]);
+  var done = BINGO_LINES.filter(function(l) {
+    return l.every(function(x) { return bingoState[x]; });
+  }).length;
+  var st = document.getElementById('bingoStatus');
+  if (!st) return;
+  if (done === 0) st.textContent = '칸을 탭하면 완성 표시가 됩니다';
+  else if (done === 1) st.textContent = '1줄 완성! 한 줄만 더!';
+  else st.textContent = '🎉 빙고! ' + done + '줄 완성!';
+}
+
+function resetBingo() {
+  bingoState = Array(16).fill(false);
 }
 
 /* ── MEMO ── */
